@@ -1,5 +1,5 @@
 <?php
-$server_name = "45.32.40.202";
+$server_name = "ns1.vultr.com";
 $username = 'root';
 $password = "GtbuCwv5DuE8l22F";
 
