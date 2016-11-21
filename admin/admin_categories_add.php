@@ -1,4 +1,4 @@
-<?php $url_common = $_SERVER['DOCUMENT_ROOT'] . "/AhKhuyenMai/"; ?>
+<?php $url_common = $_SERVER['DOCUMENT_ROOT']; ?>
 <?php include($url_common . 'includes/admin_head.php'); ?>
 <body>
 <div id="container">
