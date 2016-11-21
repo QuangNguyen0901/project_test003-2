@@ -1,5 +1,5 @@
 <div id="header">
-    <img id="logo" src="/AhKhuyenMai/images/logo.png" width="120" height="120">
+    <img id="logo" src="./images/logo.png" width="120" height="120">
 
     <div id="greeting">
         <ul>
