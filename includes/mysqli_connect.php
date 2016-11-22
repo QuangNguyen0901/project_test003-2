@@ -7,7 +7,7 @@ $password = "GtbuCwv5DuE8l22F";
 // Create connection
 $conn = mysqli_connect($server_name, $username, $password,'kmstest');
 
-// Check connection qqqqqqq
+// Check connection zzzzzzz
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
