@@ -4,6 +4,12 @@
     <?php include('./includes/header.php'); ?>
     <div id="content">
         <?php include('./includes/sidebar_a.php'); ?>
+
+        <?php
+        echo getcwd()
+        ?>
+
+
         <div id="main_content">
             <div id="filter_bar">
                 <p>Chủ đề:</p>
