@@ -14,12 +14,12 @@
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $errors = array();
                     if (empty($_POST['category'])) {
-                        $errors = "category";
+                        $errors[] = "category";
                     } else {
                         $cat_name = $_POST['category'];
                     }
                     if (empty($_POST['icon'])) {
-                        $errors = "icon";
+                        $errors[] = "icon";
                     } else {
                         $icon = $_POST['icon'];
                     }
@@ -42,7 +42,7 @@
                     <input type="text" name="category" id="category" value=""/>
                     <?php
                     if(isset($errors) && in_array('category', $errors)) {
-                        echo "<p class='warning'>Please fill in the category name</p>";
+                        echo "<p class='warning'>Hãy điền tên category</p>";
                     }
                     ?>
 
