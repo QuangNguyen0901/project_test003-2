@@ -1,16 +1,19 @@
 <?php include('./includes/head.php'); ?>
 <body>
+
+<!--\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-->
+<?php
+echo getcwd() . "AAA";
+?>
+<?php
+echo str_replace("\\","/",getcwd());
+?>
+<!--\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-->
+
 <div id="container">
     <?php include('./includes/header.php'); ?>
     <div id="content">
         <?php include('./includes/sidebar_a.php'); ?>
-
-<!--\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-->
-        <?php
-        echo getcwd()
-        ?>
-        <!--\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-->
-
         <div id="main_content">
             <div id="filter_bar">
                 <p>Chủ đề:</p>
@@ -35,7 +38,7 @@
             <div id="news">
                 <div class="news_record">
                     <div class="news_logo">
-                        <img src="<?php echo $url_common_1."images/news_logo/news_logo_0.jpg"?>" alt="new logo 0"
+                        <img src="/images/news_logo/news_logo_0.jpg" alt="new logo 0"
                              style="width: 150px;height: 150px;">
                     </div><!--end div "news_logo"-->
                     <div class="news_content">
@@ -55,7 +58,7 @@
             <div id="news">
                 <div class="news_record">
                     <div class="news_logo">
-                        <img src="images/news_logo/news_logo_0.jpg" alt="new logo 0"
+                        <img src="/images/news_logo/news_logo_0.jpg" alt="new logo 0"
                              style="width: 150px;height: 150px;">
                     </div><!--end div "news_logo"-->
                     <div class="news_content">

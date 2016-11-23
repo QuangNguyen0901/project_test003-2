@@ -1,5 +1,12 @@
-<?php $url_common = $_SERVER['DOCUMENT_ROOT']."/AhKhuyenMai/";?>
-<?php include($url_common.'includes/admin_head.php'); ?>
+<?php $url_common1 = str_replace("\\","/",getcwd());?>
+<?php $url_common = $_SERVER['DOCUMENT_ROOT'];?>
+
+<?php
+echo $url_common;
+echo $url_common1;
+?>
+
+<?php include($url_common ."/includes/admin_head.php"); ?>
 <body>
 <div id="container">
     <?php include($url_common."/includes/header.php"); ?>
@@ -29,7 +36,7 @@
             <div id="news">
                 <div class="news_record">
                     <div class="news_logo">
-                        <img src="/AhKhuyenMai/images/news_logo/news_logo_0.jpg" alt="new logo 0"
+                        <img src="/images/news_logo/news_logo_0.jpg"  alt="new logo 0"
                              style="width: 150px;height: 150px;">
                     </div><!--end div "news_logo"-->
                     <div class="news_content">
@@ -49,7 +56,7 @@
             <div id="news">
                 <div class="news_record">
                     <div class="news_logo">
-                        <img src="images/news_logo/news_logo_0.jpg" alt="new logo 0"
+                        <img src="/images/news_logo/news_logo_0.jpg" alt="new logo 0"
                              style="width: 150px;height: 150px;">
                     </div><!--end div "news_logo"-->
                     <div class="news_content">
@@ -67,7 +74,7 @@
             <div id="news">
                 <div class="news_record">
                     <div class="news_logo">
-                        <img src="images/news_logo/news_logo_0.jpg" alt="new logo 0"
+                        <img src="/images/news_logo/news_logo_0.jpg" alt="new logo 0"
                              style="width: 150px;height: 150px;">
                     </div><!--end div "news_logo"-->
                     <div class="news_content">

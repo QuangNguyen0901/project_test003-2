@@ -1,5 +1,5 @@
 <?php $url_common = $_SERVER['DOCUMENT_ROOT']; ?>
-<?php include($url_common . 'includes/admin_head.php'); ?>
+<?php include($url_common ."/includes/admin_head.php"); ?>
 <body>
 <div id="container">
     <?php include($url_common . "/includes/header.php"); ?>
