@@ -50,7 +50,7 @@
                     <input type="text" name="icon" id="icon" value=""/>
                     <?php
                     if (isset($errors) AND in_array('icon', $errors)) {
-                        echo "<p>Hãy chọn icon</p>";
+                        echo "<p class='warning'>Hãy chọn icon</p>";
                     }
                     ?>
 
