@@ -28,15 +28,16 @@
                         $q = "INSERT INTO categories (user_id, c_name, c_icon) VALUES (1,'{$cat_name}','{$icon}')";
                         $r = mysqli_query($conn, $q) or die("Query {$q} \n<br/> MySQL Error: " . mysqli_error($conn));
                         if (mysqli_affected_rows($conn) == 1) {
-                            echo "<p>Đã đăng ký category thành công</p>";
+                            $messages = "<p>Đã đăng ký category thành công</p>";
                         } else {
-                            echo "<p>Đăng ký category không thành công, không kết nối với DB được </p>";
+                            $messages = "<p>Đăng ký category không thành công, không kết nối với DB được </p>";
                         }
                     } else {
-                        echo "<p class='warning'>Hãy điền lại form</p>";
+                        $messages = "<p class='warning'>Hãy điền lại form</p>";
                     }
                 }
                 ?>
+                <?php if (!empty($messages)) echo $messages ?>
                 <form id="add_cat" action="" method="post">
                     <p>Tên Category </p>
                     <input type="text" name="category" id="category" value=""/>
