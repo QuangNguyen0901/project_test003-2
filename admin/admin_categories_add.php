@@ -33,7 +33,7 @@
                             echo "<p>Đăng ký category không thành công, không kết nối với DB được </p>";
                         }
                     } else {
-                        echo "Hãy điền lại form";
+                        echo "<p class='warning'>Hãy điền lại form</p>";
                     }
                 }
                 ?>
@@ -41,7 +41,7 @@
                     <p>Tên Category </p>
                     <input type="text" name="category" id="category" value=""/>
                     <?php
-                    if(isset($errors) && in_array('category', $errors)) {
+                    if(isset($errors) and in_array('category', $errors)) {
                         echo "<p class='warning'>Hãy điền tên category</p>";
                     }
                     ?>
