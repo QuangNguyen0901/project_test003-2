@@ -1,7 +1,6 @@
 body {
-    background: url("../images/bck3.jpg");
+    background: url("/images/bck3.jpg");
     background-color: lightblue;
-
     margin: auto;
 }
 h3,p{
@@ -43,13 +42,11 @@ h3,p{
 #greeting li {
     display: inline;
     padding-right: 5px;
-
 }
 
 #navination {
     text-align: end;
     margin-top: 60px;
-
 }
 
 #navination li {
@@ -72,10 +69,7 @@ h3,p{
 }
 #sidebar_a h3{
     text-align: center;
-
-
 }
-
 /*----------------------------------------------------------------------*/
 #main_content {
     background: rgba(0,0,0,0.6);
@@ -148,10 +142,13 @@ h3,p{
     clear: both;
 }
 
+.warning {
+    color: red;
+}
+
 #footer {
     clear: both;
     border-style: solid;
-
     padding-left: 20px;
     width: 1100px;
     margin: auto;

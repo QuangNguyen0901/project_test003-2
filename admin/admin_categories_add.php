@@ -33,7 +33,7 @@
                             echo "<p>Đăng ký category không thành công, không kết nối với DB được </p>";
                         }
                     } else {
-                        echo "Hãy điền lại form";
+                        echo "<p class='warning'> Hãy điền lại form </p>";
                     }
                 }
                 ?>
