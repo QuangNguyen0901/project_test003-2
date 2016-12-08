@@ -1,5 +1,5 @@
 <?php $url_common = $_SERVER['DOCUMENT_ROOT']; ?>
-<?php include($url_common ."/includes/admin_head.php"); ?>
+<?php include($url_common . "/includes/admin_head.php"); ?>
 <body>
 <div id="container">
     <?php include($url_common . "/includes/header.php"); ?>
@@ -16,7 +16,7 @@
                     if (empty($_POST['category'])) {
                         $errors[] = "category";
                     } else {
-                        $cat_name = $_POST['category'];
+                        $cat_name = mysqli_real_escape_string($conn, strip_tags($_POST['category']));
                     }
                     if (empty($_POST['icon'])) {
                         $errors[] = "icon";
@@ -40,15 +40,17 @@
                 <?php if (!empty($messages)) echo $messages ?>
                 <form id="add_cat" action="" method="post">
                     <p>Tên Category </p>
-                    <input type="text" name="category" id="category" value=""/>
+                    <input type="text" name="category" id="category"
+                           value="<?php if (isset($_POST['category'])) echo strip_tags($_POST['category']) ?>"/>
                     <?php
-                    if(isset($errors) and in_array('category', $errors)) {
+                    if (isset($errors) and in_array('category', $errors)) {
                         echo "<p class='warning'>Hãy điền tên category</p>";
                     }
                     ?>
 
                     <p>Chọn icon</p>
-                    <input type="text" name="icon" id="icon" value=""/>
+                    <input type="text" name="icon" id="icon"
+                           value="<?php if (isset($_POST['icon'])) echo strip_tags($_POST['icon']) ?>"/>
                     <?php
                     if (isset($errors) AND in_array('icon', $errors)) {
                         echo "<p class='warning'>Hãy chọn icon</p>";
