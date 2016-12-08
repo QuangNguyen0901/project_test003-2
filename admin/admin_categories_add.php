@@ -33,6 +33,7 @@
                             $messages = "<p>Đăng ký category không thành công, không kết nối với DB được </p>";
                         }
                     } else {
+
                         $messages = "<p class='warning'>Hãy điền lại form</p>";
                     }
                 }
