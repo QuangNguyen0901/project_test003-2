@@ -14,10 +14,10 @@
         <h3>Danh sách category</h3>
         <ul>
             <?php
-            $q = "SELECT * FROM `categories`";
+            $q = "SELECT c_name FROM `categories`";
             $r = mysqli_query($conn, $q) or die ("Query {$q} \n<br/> MySQL Error: " . mysqli_error($conn));
             while ($cats = mysqli_fetch_array($r,MYSQLI_ASSOC)){
-                echo "<li><a href=''>".$cats['c_name']."</a>";
+                echo "<li><a href='../index.php'>".$cats['c_name']."</a>";
             }
             ?>
         </ul>
