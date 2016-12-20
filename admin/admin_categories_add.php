@@ -23,9 +23,14 @@
                     } else {
                         $icon = $_POST['icon'];
                     }
+                    if (isset($_POST['position']) && filter_var($_POST['position'], FILTER_VALIDATE_INT, array('min_range' => 1))) {
+                        $position = $_POST['position'];
+                    } else {
+                        $errors[] = "position";
+                    }
 
                     if (empty($errors)) {
-                        $q = "INSERT INTO categories (user_id, c_name, c_icon) VALUES (1,'{$cat_name}','{$icon}')";
+                        $q = "INSERT INTO categories (user_id, c_name, c_icon, c_position) VALUES (1,'{$cat_name}','{$icon}',$position)";
                         $r = mysqli_query($conn, $q) or die("Query {$q} \n<br/> MySQL Error: " . mysqli_error($conn));
                         if (mysqli_affected_rows($conn) == 1) {
                             $messages = "<p>Đã đăng ký category thành công</p>";
@@ -57,6 +62,22 @@
                         echo "<p class='warning'>Hãy chọn icon</p>";
                     }
                     ?>
+                    
+                    <p>Chọn vị trí hiển thị</p>
+                    <select name="position">
+                        <?php
+                        $q = "SELECT count(categories_id) AS count FROM categories";
+                        $r = mysqli_query($conn, $q) or die("Query {$q} \n<br/> MySQL Error: " . mysqli_error($conn));
+                        if (mysqli_num_rows($r) == 1) {
+                            $num = mysqli_fetch_array($r, MYSQLI_NUM);
+                            for ($i = 1; $i <= $num + 1; $i++) {
+                                echo "<option value='{$i}'";
+                                if (isset($_POST['position']) AND $_POST['position'] == $i) echo "selected ='selected'";
+                                echo ">" . $i . "</option>";
+                            }
+                        }
+                        ?>
+                    </select>
 
                     <p><input type="submit" name="submit" value="Thêm category"></p>
                 </form>
