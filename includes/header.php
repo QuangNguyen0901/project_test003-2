@@ -14,6 +14,7 @@
             <li><a href="#">KHUYẾN MÃI</a></li>
             <li><a href="#">ĐĂNG BÀI</a></li>
             <li><a href="#">GIỚI THIỆU</a></li>
+            <li><a href="../admin/admin_categories_add.php">admin</a></li>
         </ul>
     </div><!--end div "navination"-->
 </div> <!-- end div "header"-->
