@@ -34,7 +34,7 @@
                         $r = mysqli_query($conn, $q) or die("Query {$q} \n<br/> MySQL Error: " . mysqli_error($conn));
                         if (mysqli_affected_rows($conn) == 1) {
                             $messages = "<p>Đã đăng ký category thành công</p>";
-                            header( "Location:admin_categories_add.php" );
+                            header( "Location:admin_categories_add.php" ); //reload page
                         } else {
                             $messages = "<p>Đăng ký category không thành công, không kết nối với DB được </p>";
                         }
@@ -86,7 +86,7 @@
                         ?>
                     </select>
 
-                    <p><input type="submit" name="submit" value="Thêm category"></p>
+                    <p><input type="submit" name="submit" value="Thêm category"  ></p>
                 </form>
 
             </div><!--end div "admin_title"-->
