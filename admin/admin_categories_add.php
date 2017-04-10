@@ -8,44 +8,70 @@
         <?php include($url_common . "/includes/admin_sidebar_a.php"); ?>
         <div id="main_content">
             <div id="admin_title">
+                <?php $flag ?>
                 <h3>Thêm Category mới</h3>
 
                 <?php
+
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    $errors = array();
-                    if (empty($_POST['category'])) {
-                        $errors[] = "category";
-                    } else {
-                        $cat_name = mysqli_real_escape_string($conn, strip_tags($_POST['category']));
-                    }
-                    if (empty($_POST['icon'])) {
-                        $errors[] = "icon";
-                    } else {
-                        $icon = $_POST['icon'];
-                    }
-                    if (isset($_POST['position']) && filter_var($_POST['position'], FILTER_VALIDATE_INT, array('min_range' => 1))) {
-                        $position = $_POST['position'];
-                    } else {
-                        $errors[] = "position";
-                    }
-
-                    if (empty($errors)) {
-                        $q = "INSERT INTO categories (user_id, c_name, c_icon, position) VALUES (1,'{$cat_name}','{$icon}',$position)";
-                        $r = mysqli_query($conn, $q) or die("Query {$q} \n<br/> MySQL Error: " . mysqli_error($conn));
-                        if (mysqli_affected_rows($conn) == 1) {
-                            $messages = "<p>Đã đăng ký category thành công</p>";
-                            header( "Location:admin_categories_add.php" ); //reload page
+                    if (isset($_POST['submit1'])) {
+                        $errors = array();
+                        if (empty($_POST['category'])) {
+                            $errors[] = "category";
                         } else {
-                            $messages = "<p>Đăng ký category không thành công, không kết nối với DB được </p>";
+                            $cat_name = mysqli_real_escape_string($conn, strip_tags($_POST['category']));
                         }
-                    } else {
+                        if (empty($_POST['icon'])) {
+                            $errors[] = "icon";
+                        } else {
+                            $icon = $_POST['icon'];
+                        }
+                        if (isset($_POST['position']) && filter_var($_POST['position'], FILTER_VALIDATE_INT, array('min_range' => 1))) {
+                            $position = $_POST['position'];
+                        } else {
+                            $errors[] = "position";
+                        }
 
-                        $messages = "<p class='warning'>Hãy điền lại form</p>";
+                        if (empty($errors)) {
+                            $q = "INSERT INTO categories (user_id, c_name, c_icon, position) VALUES (1,'{$cat_name}','{$icon}',$position)";
+                            $r = mysqli_query($conn, $q) or die("Query {$q} \n<br/> MySQL Error: " . mysqli_error($conn));
+                            if (mysqli_affected_rows($conn) == 1) {
+                                $messages = "<p>Đã đăng ký category thành công</p>";
+                                header("Location:admin_categories_add.php"); //reload page
+                            } else {
+                                $messages = "<p>Đăng ký category không thành công, không kết nối với DB được </p>";
+                            }
+                        } else {
+
+                            $messages = "<p class='warning'>Hãy điền lại form</p>";
+                        }
+                    }elseif (isset($_POST['submit2'])){
+                        print_r($_POST);die;
+                        $errors = array();
+                        if (empty($_POST['content'])) {
+                            $errors[] = "content";
+                        } else {
+                            $content = mysqli_real_escape_string($conn, strip_tags($_POST['submit2_content']));
+                        }
+
+                        if (empty($errors)) {
+                            $q = "INSERT INTO test_submit_2 (user_id, content) VALUES (1,'{$content}')";
+                            $r = mysqli_query($conn, $q) or die("Query {$q} \n<br/> MySQL Error: " . mysqli_error($conn));
+                            if (mysqli_affected_rows($conn) == 1) {
+                                $messages = "<p>Đã đăng ký test submit 2 thành công</p>";
+                                header( "Location:admin_categories_add.php" ); //reload page
+                            } else {
+                                $messages = "<p>Đăng ký test submit 2 không thành công, không kết nối với DB được </p>";
+                            }
+                        } else {
+                            $messages = "<p class='warning'>Hãy điền lại form submit2</p>";
+                        }
                     }
                 }
                 ?>
                 <?php if (!empty($messages)) echo $messages ?>
                 <form id="add_cat" action="" method="post">
+
                     <p>Tên Category </p>
                     <input type="text" name="category" id="category"
                            value="<?php if (isset($_POST['category'])) echo strip_tags($_POST['category']) ?>"/>
@@ -74,9 +100,9 @@
                             list($num) = mysqli_fetch_array($r, MYSQLI_NUM);
                             for ($i = 1; $i <= $num + 1; $i++) {
                                 echo "<option value='{$i}'";
-                                if (isset($_POST['position']) AND $_POST['position'] == $i){
+                                if (isset($_POST['position']) AND $_POST['position'] == $i) {
                                     echo "selected ='selected'";
-                                }elseif (empty ($_POST['position'])AND $i==$num + 1){
+                                } elseif (empty ($_POST['position']) AND $i == $num + 1) {
                                     echo "selected ='selected'";
                                 }
 
@@ -86,9 +112,16 @@
                         ?>
                     </select>
 
-                    <p><input type="submit" name="submit" value="Thêm category"  ></p>
+                    <p><input type="submit" name="submit1" value="Thêm category" onclick="<?php $flag = 0; ?>"></p>
                 </form>
 
+                <!--test submit2"-->
+                <form id="test_submit_2" action="" method="post">
+                    <p>Test submit 2 </p>
+                    <input type="text" name="submit2_content" value=""/>
+                    <p><input type="submit" name="submit2" value="submit_2"></p>  <!--co the p la tu xuong dong-->
+                </form>
+                <!--end test submit2"-->
             </div><!--end div "admin_title"-->
 
         </div><!--end div "main_content"-->
@@ -99,6 +132,7 @@
 </div><!--end div "container"-->
 </body>
 </html>
+
 
 
 
