@@ -8,13 +8,13 @@
         <?php include($url_common . "/includes/admin_sidebar_a.php"); ?>
         <div id="main_content">
             <div id="admin_title">
-                <?php $flag ?>
                 <h3>Thêm Category mới</h3>
 
                 <?php
 
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     if (isset($_POST['submit1'])) {
+                        print_r($_POST);
                         $errors = array();
                         if (empty($_POST['category'])) {
                             $errors[] = "category";
@@ -45,10 +45,9 @@
 
                             $messages = "<p class='warning'>Hãy điền lại form</p>";
                         }
-                    }elseif (isset($_POST['submit2'])){
-                        print_r($_POST);die;
+                    } elseif (isset($_POST['submit2'])) {
                         $errors = array();
-                        if (empty($_POST['content'])) {
+                        if (empty($_POST['submit2_content'])) {
                             $errors[] = "content";
                         } else {
                             $content = mysqli_real_escape_string($conn, strip_tags($_POST['submit2_content']));
@@ -59,7 +58,7 @@
                             $r = mysqli_query($conn, $q) or die("Query {$q} \n<br/> MySQL Error: " . mysqli_error($conn));
                             if (mysqli_affected_rows($conn) == 1) {
                                 $messages = "<p>Đã đăng ký test submit 2 thành công</p>";
-                                header( "Location:admin_categories_add.php" ); //reload page
+                                //header("Location:admin_categories_add.php"); //reload page
                             } else {
                                 $messages = "<p>Đăng ký test submit 2 không thành công, không kết nối với DB được </p>";
                             }
@@ -112,13 +111,18 @@
                         ?>
                     </select>
 
-                    <p><input type="submit" name="submit1" value="Thêm category" onclick="<?php $flag = 0; ?>"></p>
+                    <p><input type="submit" name="submit1" value="Thêm category"></p>
                 </form>
 
                 <!--test submit2"-->
                 <form id="test_submit_2" action="" method="post">
                     <p>Test submit 2 </p>
                     <input type="text" name="submit2_content" value=""/>
+                    <?php
+                    if (isset($errors) AND in_array('content',$errors)){
+                        echo "<p class='warning'>Hãy nhập content</p>";
+                    }
+                    ?>
                     <p><input type="submit" name="submit2" value="submit_2"></p>  <!--co the p la tu xuong dong-->
                 </form>
                 <!--end test submit2"-->
