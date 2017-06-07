@@ -14,6 +14,7 @@
 
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     if (isset($_POST['submit1'])) {
+                        print_r($_POST);
                         $errors = array();
                         if (empty($_POST['category'])) {
                             $errors[] = "category";
@@ -60,7 +61,7 @@
                             $r = mysqli_query($conn, $q) or die("Query {$q} \n<br/> MySQL Error: " . mysqli_error($conn));
                             if (mysqli_affected_rows($conn) == 1) {
                                 $messages = "<p>Đã đăng ký test submit 2 thành công</p>";
-                                header( "Location:admin_categories_add.php" ); //reload page
+                                //header("Location:admin_categories_add.php"); //reload page
                             } else {
                                 $messages = "<p>Đăng ký test submit 2 không thành công, không kết nối với DB được </p>";
                             }
@@ -120,6 +121,11 @@
                 <form id="test_submit_2" action="" method="post">
                     <p>Test submit 2 </p>
                     <input type="text" name="submit2_content" value=""/>
+                    <?php
+                    if (isset($errors) AND in_array('content',$errors)){
+                        echo "<p class='warning'>Hãy nhập content</p>";
+                    }
+                    ?>
                     <p><input type="submit" name="submit2" value="submit_2"></p>  <!--co the p la tu xuong dong-->
                 </form>
                 <!--end test submit2"-->
