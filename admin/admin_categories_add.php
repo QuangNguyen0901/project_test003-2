@@ -57,7 +57,7 @@
                         }
 
                         if (empty($errors)) {
-                            $q = "INSERT INTO test_submit_2 (id, content) VALUES (1,'{$content}')";
+                            $q = "INSERT INTO test_submit_2 (content) VALUES ({$content})";
                             $r = mysqli_query($conn, $q) or die("Query {$q} \n<br/> MySQL Error: " . mysqli_error($conn));
                             if (mysqli_affected_rows($conn) == 1) {
                                 $messages = "<p>Đã đăng ký test submit 2 thành công</p>";
