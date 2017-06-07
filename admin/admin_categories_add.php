@@ -8,7 +8,6 @@
         <?php include($url_common . "/includes/admin_sidebar_a.php"); ?>
         <div id="main_content">
             <div id="admin_title">
-                <?php $flag ?>
                 <h3>Thêm Category mới</h3>
 
                 <?php
@@ -46,16 +45,18 @@
                             $messages = "<p class='warning'>Hãy điền lại form</p>";
                         }
                     }elseif (isset($_POST['submit2'])){
-                        print_r($_POST);die;
+                        //echo '<pre>';
+                       // print_r($_POST);die;
+                        //echo '</pre>';
                         $errors = array();
-                        if (empty($_POST['content'])) {
-                            $errors[] = "content";
+                        if (empty($_POST['submit2_content'])) {
+                            $errors[] = "submit2_content";
                         } else {
                             $content = mysqli_real_escape_string($conn, strip_tags($_POST['submit2_content']));
                         }
 
                         if (empty($errors)) {
-                            $q = "INSERT INTO test_submit_2 (user_id, content) VALUES (1,'{$content}')";
+                            $q = "INSERT INTO test_submit_2 (id, content) VALUES (1,'{$content}')";
                             $r = mysqli_query($conn, $q) or die("Query {$q} \n<br/> MySQL Error: " . mysqli_error($conn));
                             if (mysqli_affected_rows($conn) == 1) {
                                 $messages = "<p>Đã đăng ký test submit 2 thành công</p>";
@@ -112,7 +113,7 @@
                         ?>
                     </select>
 
-                    <p><input type="submit" name="submit1" value="Thêm category" onclick="<?php $flag = 0; ?>"></p>
+                    <p><input type="submit" name="submit1" value="Thêm category"></p>
                 </form>
 
                 <!--test submit2"-->
