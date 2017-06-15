@@ -4,7 +4,7 @@ body {
     margin: auto;
 }
 h3,p{
-    color: red;
+    color: white;
 }
 
 table {
@@ -13,11 +13,11 @@ table {
     width: 100%;
 }
 
-td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-}
+/*td, th {*/
+    /*border: 1px solid #dddddd;*/
+    /*text-align: left;*/
+    /*padding: 8px;*/
+/*}*/
 
 tr:nth-child(even) {
     background-color: #dddddd;
@@ -88,7 +88,7 @@ tr:nth-child(even) {
 }
 /*----------------------------------------------------------------------*/
 #main_content {
-    background: rgba(0,0,0,0.6);
+    /*background: rgba(0,0,0,0.6);*/
 
     float: left;
     border-style: solid;
@@ -168,8 +168,4 @@ tr:nth-child(even) {
     padding-left: 20px;
     width: 1100px;
     margin: auto;
-}
-
-.warning {
-    color: red;
 }

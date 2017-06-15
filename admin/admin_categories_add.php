@@ -14,7 +14,7 @@
 
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     if (isset($_POST['submit1'])) {
-                        print_r($_POST);
+//                        print_r($_POST);
                         $errors = array();
                         if (empty($_POST['category'])) {
                             $errors[] = "category";
@@ -45,9 +45,9 @@
 
                             $messages = "<p class='warning'>Hãy điền lại form</p>";
                         }
-                    }elseif (isset($_POST['submit2'])){
+                    } elseif (isset($_POST['submit2'])) {
                         //echo '<pre>';
-                       // print_r($_POST);die;
+                        // print_r($_POST);die;
                         //echo '</pre>';
                         $errors = array();
                         if (empty($_POST['submit2_content'])) {
@@ -113,21 +113,26 @@
                         }
                         ?>
                     </select>
-
-                    <p><input type="submit" name="submit1" value="Thêm category"></p>
+                    <br><br>
+                    <button type="submit" class="btn" name="submit1">Thêm category</button>
                 </form>
+                <br><br>
 
                 <!--test submit2"-->
                 <form id="test_submit_2" action="" method="post">
                     <p>Test submit 2 </p>
-                    <input type="text" name="submit2_content" value=""/>
+                    <input type="text" name="submit2_content" value="">
                     <?php
-                    if (isset($errors) AND in_array('content',$errors)){
+                    if (isset($errors) AND in_array('content', $errors)) {
                         echo "<p class='warning'>Hãy nhập content</p>";
                     }
                     ?>
-                    <p><input type="submit" name="submit2" value="submit_2"></p>  <!--co the p la tu xuong dong-->
+                    <br><br>
+                    <input type="submit" class="btn" name="submit2" value="submit_2">
+                    <!--co the p la tu xuong dong-->
                 </form>
+                <br><br>
+                <a class="btn" href="../admin/admin_categories_view.php">Go to View</a>
                 <!--end test submit2"-->
             </div><!--end div "admin_title"-->
 
