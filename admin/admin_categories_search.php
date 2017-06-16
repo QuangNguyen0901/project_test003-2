@@ -26,10 +26,6 @@
                     </thead>
                     <tbody>
                     <?php
-                    //////////////////////////////////////////////////////////////////
-                    if (isset($_POST['search']){
-
-                    }
                     $q= "SELECT categories_id,c_name FROM `categories`";
                     $r= mysqli_query($conn, $q) or die ("Query {$q} \n<br/> MySQL Error: " . mysqli_error($conn));
 
