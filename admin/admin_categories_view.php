@@ -9,10 +9,19 @@
         <div id="main_content">
             <div id="search_condition">
                 <form action="" method="post">
+                    <?php
+                    $inputed_cname="";
+                    $inputed_id="";
+                    if (isset($_POST['search'])){
+                        $inputed_cname=$_POST['category_name_search'];
+                        $inputed_id=$_POST['category_id_search'];
+                    }
+                    print_r($_GET);
+                    ?>
                     <p>Category name:</p>
-                    <input type="text" class="input-lg" name="category_name_search" value=""><br><br>
+                    <input type="text" class="input-lg" name="category_name_search" value="<?= $inputed_cname ?>"><br><br>
                     <p>Category ID:</p>
-                    <input type="text" class="input-lg" name="category_id_search" value=""><br><br>
+                    <input type="text" class="input-lg" name="category_id_search" value="<?= $inputed_id ?>"><br><br>
                     <button type="submit" class="btn" name="search">Search</button>
                     <button class="btn" name="clear_search">Clear</button>
                 </form>
@@ -31,7 +40,7 @@
                     //////////////////////////////////////////////////////////////////
                     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         if (isset($_POST['search'])) {
-                            print_r($_POST['category_name_search']);
+//                            print_r($_POST['category_name_search']);
                             $search_value = $_POST['category_name_search'];
                             $search_id = $_POST['category_id_search'];
                             $q = "SELECT categories_id,c_name FROM `categories` WHERE
@@ -49,12 +58,14 @@
                     $r = mysqli_query($conn, $q) or die ("Query {$q} \n<br/> MySQL Error: " . mysqli_error($conn));
                     //var_dump($r);
                     while ($cats = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
-//                        '<br/>'.var_dump($cats);
-                        echo "<tr>
-                        <td>" . $cats['categories_id'] . "</td>
-                        <td>" . $cats['c_name'] . "</td>
-                        <td><button class='btn-xs btn-primary'>Delete</button></td>
-                    </tr>";
+                        //                        '<br/>'.var_dump($cats);
+                        ?>
+                        <tr>
+                        <td><?= $cats['categories_id'] ?></td>
+                        <td><?= $cats['c_name'] ?></td>
+                        <td><button onclick="location.href='/admin/admin_categories_view.php?delete=<?= $cats['categories_id'] ?>'" class='btn-xs btn-primary'>Delete</button></td>
+                        </tr>
+                    <?php
                     }
                     ?>
                     </tbody>
@@ -69,12 +80,6 @@
 </div><!--end div "container"-->
 </body>
 </html>
-
-
-
-
-
-
 
 
 
