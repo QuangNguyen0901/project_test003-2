@@ -8,7 +8,7 @@
         <?php include($url_common . "/includes/admin_sidebar_a.php"); ?>
         <div id="main_content">
             <div id="search_condition">
-                <form action="" method="get">
+                <form action="" method="post">
                     <p>Category name:</p>
                     <input type="text" class="input-lg" name="category_name_search" value=""><br><br>
                     <p>Category ID:</p>
@@ -29,11 +29,11 @@
                     <tbody>
                     <?php
                     //////////////////////////////////////////////////////////////////
-                    if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-                        if (isset($_GET['search'])) {
-                            print_r($_GET['category_name_search']);
-                            $search_value = $_GET['category_name_search'];
-                            $search_id = $_GET['category_id_search'];
+                    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                        if (isset($_POST['search'])) {
+                            print_r($_POST['category_name_search']);
+                            $search_value = $_POST['category_name_search'];
+                            $search_id = $_POST['category_id_search'];
                             $q = "SELECT categories_id,c_name FROM `categories` WHERE
                             `c_name` LIKE '%" . $search_value . "%'";
                             if (!empty($search_id)) {
