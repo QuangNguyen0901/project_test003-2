@@ -11,7 +11,6 @@
                 <h3>Thêm Category mới</h3>
 
                 <?php
-
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     if (isset($_POST['submit1'])) {
 //                        print_r($_POST);

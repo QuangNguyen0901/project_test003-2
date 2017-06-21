@@ -10,13 +10,20 @@
             <div id="search_condition">
                 <form action="" method="post">
                     <?php
+                    if (isset($_GET['delete'])){
+                        $delete_id = $_GET['delete'];
+//                        print_r($delete_id);
+                        $q_delete = "DELETE FROM `categories` WHERE `categories_id` =".$delete_id;
+                        $r_delete = mysqli_query($conn, $q_delete) or die ("Query {$q_delete} \n<br/> MySQL Error: " . mysqli_error($conn));
+                    }
+
                     $inputed_cname="";
                     $inputed_id="";
                     if (isset($_POST['search'])){
                         $inputed_cname=$_POST['category_name_search'];
                         $inputed_id=$_POST['category_id_search'];
                     }
-                    print_r($_GET);
+//                    print_r($_GET);
                     ?>
                     <p>Category name:</p>
                     <input type="text" class="input-lg" name="category_name_search" value="<?= $inputed_cname ?>"><br><br>
@@ -43,8 +50,7 @@
 //                            print_r($_POST['category_name_search']);
                             $search_value = $_POST['category_name_search'];
                             $search_id = $_POST['category_id_search'];
-                            $q = "SELECT categories_id,c_name FROM `categories` WHERE
-                            `c_name` LIKE '%" . $search_value . "%'";
+                            $q = "SELECT categories_id,c_name FROM `categories` WHERE `c_name` LIKE '%" . $search_value . "%'";
                             if (!empty($search_id)) {
                                 $q .= " AND `categories_id` = '" . $search_id . "' ";
                             }
