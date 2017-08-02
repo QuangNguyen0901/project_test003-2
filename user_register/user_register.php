@@ -53,6 +53,7 @@ if (isset($_POST['confirm'])) {
                 <div class="form-group">
                     <label>User Name:</label>
                     <input type="text" class="form-control" name="uname" id="usr">
+                    <p id="username" style="color: greenyellow"></p>
                     <?php
                     if (isset($_POST['confirm'])) {
                         if (in_array("user_name", $error)) {
@@ -69,6 +70,7 @@ if (isset($_POST['confirm'])) {
                 <div class="form-group">
                     <label>Confirm Password:</label>
                     <input type="password" class="form-control" name="confirm_pass" id="pwd1">
+                    <p id="validate_confirm_pass" style="color: greenyellow"></p>
                 </div>
                 <div class="form-group">
                     <label>Sex:
@@ -85,6 +87,7 @@ if (isset($_POST['confirm'])) {
                 <!--                </div>-->
                 <button type="submit" class="btn btn-primary" id="aaaa" name="confirm">Confirm</button>
             </form>
+            <p id="demo"></p>
         </div>
         <div class="col-md-2">RIGHT</div>
     </div>
@@ -92,7 +95,7 @@ if (isset($_POST['confirm'])) {
         <div class="col-md-12" style="background-color:lavender;">BOTTOM</div>
     </div>
 </div>
-<p onclick="validate_password()" >aaaaaa</p>
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
 <script>
@@ -107,13 +110,39 @@ if (isset($_POST['confirm'])) {
 //        }
     });
     function validate_password() {
+        var a1 = document.getElementById("username");
+        var x1 = document.getElementById("usr").value;
+        var a2 = document.getElementById("validate_pass");
+        var x2 = document.getElementById("pwd").value;
+        var a3 = document.getElementById("validate_confirm_pass");
+        var x3 = document.getElementById("pwd1").value;
 
-        var a = document.getElementById("validate_pass");
-        var x = document.getElementById("pwd").value;
-        if (x==""){
-            a.innerHTML="Please input password";
+        if (x1=="") {
+            a1.innerHTML = "Please input username";
             return false;
         }
+        if (x2==""){
+            a2.innerHTML="Please input password";
+            return false;
+        }else if(!x2.match(/^\d+$/g)){
+            a2.innerHTML="Please input only number";
+            return false;
+        }else if((x2.length < 6)||(x2.length > 8)){
+            a2.innerHTML="Please input 6-8 charaters";
+            return false;
+        }
+
+        if (x3=="") {
+            a3.innerHTML = "Please input confirm password";
+            return false;
+        }else if(x2 != x3){
+            a3.innerHTML = "Confirm pass not match password";
+            return false;
+        }
+//        var y=x.match(/^\d+$/g);
+//        document.getElementById("demo").innerHTML = y;
+//        return false;
+
 
 
 
