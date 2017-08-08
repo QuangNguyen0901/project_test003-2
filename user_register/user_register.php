@@ -35,8 +35,8 @@ if (isset($_POST['confirm'])) {
     } else {
         $sex = mysqli_real_escape_string($conn, strip_tags($_POST['sex']));
     }
-//    print_r($_POST);
-    print_r($error);
+    print_r($_POST);
+//    print_r($error);
 }
 
 ?>
@@ -53,7 +53,7 @@ if (isset($_POST['confirm'])) {
                 <div class="form-group">
                     <label>User Name:</label>
                     <input type="text" class="form-control" name="uname" id="usr">
-                    <p id="username" style="color: greenyellow"></p>
+                    <p id="username" style="color: red"></p>
                     <?php
                     if (isset($_POST['confirm'])) {
                         if (in_array("user_name", $error)) {
@@ -65,12 +65,12 @@ if (isset($_POST['confirm'])) {
                 <div class="form-group">
                     <label>Password:</label>
                     <input type="password" class="form-control" name="pass" id="pwd">
-                    <p id="validate_pass" style="color: greenyellow"></p>
+                    <p id="validate_pass" style="color: red"></p>
                 </div>
                 <div class="form-group">
                     <label>Confirm Password:</label>
                     <input type="password" class="form-control" name="confirm_pass" id="pwd1">
-                    <p id="validate_confirm_pass" style="color: greenyellow"></p>
+                    <p id="validate_confirm_pass" style="color: red"></p>
                 </div>
                 <div class="form-group">
                     <label>Sex:
@@ -85,7 +85,7 @@ if (isset($_POST['confirm'])) {
                 <!--                <div class="checkbox">-->
                 <!--                    <label><input type="checfsdfsdfdskbox"> Remember me</label>-->
                 <!--                </div>-->
-                <button type="submit" class="btn btn-primary" id="aaaa" name="confirm">Confirm</button>
+                <button type="submit" class="btn btn-primary" id="btn_confirm" name="confirm">Confirm</button>
             </form>
             <p id="demo"></p>
         </div>
@@ -100,8 +100,8 @@ if (isset($_POST['confirm'])) {
 
 <script>
 
-    $("#aaaa").click(function() {
-        return validate_password();
+    $("#btn_confirm").click(function() {
+        return validate_form();
 //        var a = document.getElementById("validate_pass");
 //        var x = document.getElementById("pwd").value;
 //        if (x==""){
@@ -109,43 +109,42 @@ if (isset($_POST['confirm'])) {
 //            return false;
 //        }
     });
-    function validate_password() {
+    function validate_form() {
         var a1 = document.getElementById("username");
         var x1 = document.getElementById("usr").value;
         var a2 = document.getElementById("validate_pass");
         var x2 = document.getElementById("pwd").value;
         var a3 = document.getElementById("validate_confirm_pass");
         var x3 = document.getElementById("pwd1").value;
+        var chk = true;
 
         if (x1=="") {
             a1.innerHTML = "Please input username";
-            return false;
+            chk = false;
         }
+
         if (x2==""){
             a2.innerHTML="Please input password";
-            return false;
+            chk = false;
         }else if(!x2.match(/^\d+$/g)){
             a2.innerHTML="Please input only number";
-            return false;
+            chk = false;
         }else if((x2.length < 6)||(x2.length > 8)){
-            a2.innerHTML="Please input 6-8 charaters";
-            return false;
+            a2.innerHTML="Please input 6-8 characters";
+            chk = false;
         }
 
         if (x3=="") {
             a3.innerHTML = "Please input confirm password";
-            return false;
+            chk = false;
         }else if(x2 != x3){
             a3.innerHTML = "Confirm pass not match password";
-            return false;
+            chk = false;
         }
+        return chk;
 //        var y=x.match(/^\d+$/g);
 //        document.getElementById("demo").innerHTML = y;
 //        return false;
-
-
-
-
     }
 </script>
 
