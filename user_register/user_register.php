@@ -35,6 +35,16 @@ if (isset($_POST['confirm'])) {
     } else {
         $sex = mysqli_real_escape_string($conn, strip_tags($_POST['sex']));
     }
+    if (empty($error)){
+        $q = "INSERT INTO user (username, pass) VALUE ('{$uname}','{$pass}')";
+        $r = mysqli_query($conn,$q) or die ("Query {$q} \n<br/> MySQL Error: " . mysqli_error($conn));
+        if (mysqli_affected_rows($conn) == 1) {
+            $messages = "<p>Đã đăng ký user thành công</p>";
+            header("Location:user_register.php"); //reload page
+        } else {
+            $messages = "<p>Đăng ký user không thành công, không kết nối với DB được </p>";
+        }
+    }
     print_r($_POST);
 //    print_r($error);
 }
@@ -75,12 +85,13 @@ if (isset($_POST['confirm'])) {
                 <div class="form-group">
                     <label>Sex:
                         <label class="radio-inline">
-                            <input type="radio" name="sex" value="1">Male
+                            <input type="radio" name="sex" id="sex-1" value="1">Male
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="sex" value="2">Female
+                            <input type="radio" name="sex" id="sex-2" value="2">Female
                         </label>
                     </label>
+                    <p id="sex" style="color: red"></p>
                 </div>
                 <!--                <div class="checkbox">-->
                 <!--                    <label><input type="checfsdfsdfdskbox"> Remember me</label>-->
@@ -116,6 +127,10 @@ if (isset($_POST['confirm'])) {
         var x2 = document.getElementById("pwd").value;
         var a3 = document.getElementById("validate_confirm_pass");
         var x3 = document.getElementById("pwd1").value;
+        var a4 = document.getElementById("sex");
+        var x4a = document.getElementById("sex-1");
+        var x4b = document.getElementById("sex-2");
+
         var chk = true;
 
         if (x1=="") {
@@ -141,10 +156,12 @@ if (isset($_POST['confirm'])) {
             a3.innerHTML = "Confirm pass not match password";
             chk = false;
         }
+
+        if(x4a.checked==false && x4b.checked==false){
+            a4.innerHTML = "Please select male or female";
+            chk = false;
+        }
         return chk;
-//        var y=x.match(/^\d+$/g);
-//        document.getElementById("demo").innerHTML = y;
-//        return false;
     }
 </script>
 
