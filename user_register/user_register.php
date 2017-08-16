@@ -39,13 +39,13 @@ if (isset($_POST['confirm'])) {
         $q = "INSERT INTO user (username, pass) VALUE ('{$uname}','{$pass}')";
         $r = mysqli_query($conn,$q) or die ("Query {$q} \n<br/> MySQL Error: " . mysqli_error($conn));
         if (mysqli_affected_rows($conn) == 1) {
-            $messages = "<p>Đã đăng ký user thành công</p>";
-            header("Location:user_register.php"); //reload page
+            $messages = "<p style='color: red'>Đã đăng ký user thành công</p>";
+//            header("Location:user_register.php"); //reload page
         } else {
-            $messages = "<p>Đăng ký user không thành công, không kết nối với DB được </p>";
+            $messages = "<p class='label-warning'>Đăng ký user không thành công, không kết nối với DB được </p>";
         }
     }
-    print_r($_POST);
+//    print_r($_POST);
 //    print_r($error);
 }
 
@@ -59,6 +59,7 @@ if (isset($_POST['confirm'])) {
         <div class="col-md-2">LEFT</div>
         <div class="col-md-8" style="background-color: #ffbe87;">
             <h4>Member Register</h4>
+            <?php if (!empty($messages)) echo $messages ?>
             <form method="post" action="user_register.php" name="register_form">
                 <div class="form-group">
                     <label>User Name:</label>
@@ -136,6 +137,8 @@ if (isset($_POST['confirm'])) {
         if (x1=="") {
             a1.innerHTML = "Please input username";
             chk = false;
+        }else {
+            a1.innerHTML = "";
         }
 
         if (x2==""){
@@ -147,6 +150,8 @@ if (isset($_POST['confirm'])) {
         }else if((x2.length < 6)||(x2.length > 8)){
             a2.innerHTML="Please input 6-8 characters";
             chk = false;
+        }else{
+            a2.innerHTML="";
         }
 
         if (x3=="") {
@@ -155,11 +160,15 @@ if (isset($_POST['confirm'])) {
         }else if(x2 != x3){
             a3.innerHTML = "Confirm pass not match password";
             chk = false;
+        }else{
+            a3.innerHTML = "";
         }
 
         if(x4a.checked==false && x4b.checked==false){
             a4.innerHTML = "Please select male or female";
             chk = false;
+        }else{
+            a4.innerHTML = "";
         }
         return chk;
     }
