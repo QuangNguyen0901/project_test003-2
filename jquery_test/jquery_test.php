@@ -131,6 +131,80 @@
     });
 
 </script>
+<!----------------------------------------------------------------------->
+<br/>
+<input type="textbox" id="inputid" value="Giá trị input"/> Ăn <br/>
+<input type="button" id="view1" value="Xóa Type"/>
+<input type="button" id="view2" value="Thêm vào thuộc tính type = radio"/>
+
+<script language="javascript">
+
+    // Bắt đầu code jquery
+    $(document).ready(function(){
+
+        // Xóa thuộc tính type khi click vào button 1
+        $('#view1').click(function(){
+            $('#inputid').removeAttr('value');
+        });
+
+
+        // Thêm vào thuộc tính type = radio
+        $('#view2').click(function(){
+            $('#inputid').attr('type', 'radio');
+        });
+
+    });
+
+</script>
+<!----------------------------------------------------------------------->
+<h1>Ví dụ 1</h1>
+<strong>Sở thích của bạn là gì? </strong> <br/>
+<input type="checkbox" id="an" name="sothich" value="1"/> Ăn <br/>
+
+<input type="button" id="view11" value="Xem Name và Type"/>
+<input type="button" id="view21" value="Đổi type thành textbox"/>
+<input type="button" id="view31" value="Đổi type thành checkbox"/>
+
+<!--id khong duoc dat trung nhau-->
+
+<script language="javascript">
+
+    // Bắt đầu code jquery
+    $(document).ready(function(){
+
+        // Khi click vào button có id = view1
+        $('#view11').click(function(){
+
+            // Lấy tên của checkbox có id là an
+            var name = $('#an').attr('name');
+
+            // lấy type của checkbox
+            var type = $('#an').attr('type');
+
+            alert('Name là ' + name + ' và type là ' + type);
+
+        });
+
+
+        // Khi click vào button có id = view2
+        $('#view21').click(function(){
+            // Thay đổi kiểu thành textbox
+            $('#an').attr('type', 'textbox');
+
+        });
+
+
+        // Khi click vào button có id = view3
+        $('#view31').click(function(){
+            // Thay đổi kiểu thành radio
+            $('#an').attr('type', 'radio');
+
+        });
+
+    });
+
+</script>
+
 
 
 </body>
