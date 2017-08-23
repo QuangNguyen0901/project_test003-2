@@ -48,6 +48,32 @@
 <br/>
 <input type="text" value="" id="number"/>
 <input type="button" name="clickme" id="clickme_2" onclick="load_ajax_2()" value="Click Me_2"/>
+<br>
+<p>----------------------------------------------------</p>
+
+<div id="result01">TEXT</div>
+<div id="result02">JSON</div>
+<div id="result03">XML</div>
+<br/>
+<input type="button" name="clickmeA" id="text-click" value="Get List By Text"/>
+<input type="button" name="clickmeA" id="json-click" value="Get List By Json"/>
+<input type="button" name="clickmeA" id="xml-click" value="Get List By XML"/>
+
+<script language="javascript">
+    $('#text-click').click(function()
+    {
+        $.ajax({
+            url : 'text.php',
+            type : 'get',
+            dataType : 'text',
+            success : function (result){
+                $('#result01').html(result);
+            }
+        });
+    });
+</script>
+
+
 
 </body>
 </html>
