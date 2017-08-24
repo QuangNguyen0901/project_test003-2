@@ -73,6 +73,47 @@
     });
 </script>
 
+<script language="javascript">
+    $('#json-click').click(function()
+    {
+        $.ajax({
+            url : 'json.php',
+            type : 'get',
+            dataType : 'json',
+            success : function (result){
+
+                var html = '';
+                html += '<table border="1" cellspacing="0" cellpadding="10">';
+                html += '<tr>';
+                html += '<td>';
+                html += 'ID';
+                html += '</td>';
+                html += '<td>';
+                html += 'User Name';
+                html += '</td>';
+                html += '<tr>';
+
+                // Kết quả là một object json
+                // Nên ta sẽ loop result
+                $.each (result, function (key, item){
+                    html +=  '<tr>';
+                    html +=  '<td>';
+                    html +=  item['user_id'];
+                    html +=  '</td>';
+                    html +=  '<td>';
+                    html +=  item['username'];
+                    html +=  '</td>';
+                    html +=  '<tr>';
+                });
+
+                html +=  '</table>';
+
+                $('#result02').html(html);
+            }
+        });
+    });
+</script>
+
 
 
 </body>
