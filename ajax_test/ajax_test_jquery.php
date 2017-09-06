@@ -60,13 +60,12 @@
 <input type="button" name="clickmeA" id="xml-click" value="Get List By XML"/>
 
 <script language="javascript">
-    $('#text-click').click(function()
-    {
+    $('#text-click').click(function () {
         $.ajax({
-            url : 'text.php',
-            type : 'get',
-            dataType : 'text',
-            success : function (result){
+            url: 'text.php',
+            type: 'get',
+            dataType: 'text',
+            success: function (result) {
                 $('#result01').html(result);
             }
         });
@@ -74,13 +73,13 @@
 </script>
 
 <script language="javascript">
-    $('#json-click').click(function()
-    {
+    $('#json-click').click(function () {
         $.ajax({
-            url : 'json.php',
-            type : 'get',
-            dataType : 'json',
-            success : function (result){
+            url: 'json.php',
+            type: 'get',
+            dataType: 'json',
+            success: function (result_json2) {
+//result_json2  khai bao bien chua noi dung lay ve tu file json.php
 
                 var html = '';
                 html += '<table border="1" cellspacing="0" cellpadding="10">';
@@ -95,18 +94,18 @@
 
                 // Kết quả là một object json
                 // Nên ta sẽ loop result
-                $.each (result, function (key, item){
-                    html +=  '<tr>';
-                    html +=  '<td>';
-                    html +=  item['user_id'];
-                    html +=  '</td>';
-                    html +=  '<td>';
-                    html +=  item['username'];
-                    html +=  '</td>';
-                    html +=  '<tr>';
+                $.each(result_json2, function (key, item) {
+                    html += '<tr>';
+                    html += '<td>';
+                    html += item['user_id_json'];
+                    html += '</td>';
+                    html += '<td>';
+                    html += item['username_json'];
+                    html += '</td>';
+                    html += '<tr>';
                 });
 
-                html +=  '</table>';
+                html += '</table>';
 
                 $('#result02').html(html);
             }
@@ -114,6 +113,57 @@
     });
 </script>
 
+<script language="javascript">
+    $('#xml-click').click(function () {
+        var html = '';
+        html += '<table border="1" cellspacing="0" cellpadding="10">';
+        html += '<tr>';
+        html += '<td>';
+        html += 'USER ID';
+        html += '</td>';
+        html += '<td>';
+        html += 'USER NAME';
+        html += '</td>';
+        html += '<tr>';
+
+        $.ajax({
+            url: 'xml.php',
+            type: 'get',
+            dataType: 'xml',
+            success: function (result) {
+                // HTML lúc đầu
+                var html = '';
+                html += '<table border="1" cellspacing="0" cellpadding="10">';
+                html += '<tr>';
+                html += '<td>';
+                html += 'USER ID';
+                html += '</td>';
+                html += '<td>';
+                html += 'USER NAME';
+                html += '</td>';
+                html += '<tr>';
+
+                // Lặp để lấy data
+                $(result).find('items').each(function (key, val) {
+                    html += '<tr>';
+                    html += '<td>';
+                    html += $(val).find('user_id').text();
+                    html += '</td>';
+                    html += '<td>';
+                    html += $(val).find('username').text();
+                    html += '</td>';
+                    html += '<tr>';
+                });
+
+                html += '</table>';
+
+                $('#result03').html(html);
+            }
+        })
+        $('#result03').html(html);
+    })
+
+</script>
 
 
 </body>
