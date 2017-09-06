@@ -3,9 +3,10 @@
 <?php
 $query = mysqli_query($conn,'select user_id,username from user ');
 
-echo '<?xml version="1.0" encoding="UTF-8" ?>';
-echo '<root>';
+header('Content-type: text/xml');
+echo '<?xml version="1.0" encoding="utf-8" ?>';
 
+echo '<root>';
 
 if (mysqli_num_rows($query)>0)
 {

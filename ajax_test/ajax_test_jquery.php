@@ -115,22 +115,24 @@
 
 <script language="javascript">
     $('#xml-click').click(function () {
-        var html = '';
-        html += '<table border="1" cellspacing="0" cellpadding="10">';
-        html += '<tr>';
-        html += '<td>';
-        html += 'USER ID';
-        html += '</td>';
-        html += '<td>';
-        html += 'USER NAME';
-        html += '</td>';
-        html += '<tr>';
+//        var html = '';
+//        html += '<table border="1" cellspacing="0" cellpadding="10">';
+//        html += '<tr>';
+//        html += '<td>';
+//        html += 'USER ID';
+//        html += '</td>';
+//        html += '<td>';
+//        html += 'USER NAME';
+//        html += '</td>';
+//        html += '<tr>';
 
         $.ajax({
+//            url: 'xm.xml',
             url: 'xml.php',
             type: 'get',
             dataType: 'xml',
             success: function (result) {
+//                console.log("aaa");
                 // HTML lúc đầu
                 var html = '';
                 html += '<table border="1" cellspacing="0" cellpadding="10">';
@@ -158,9 +160,12 @@
                 html += '</table>';
 
                 $('#result03').html(html);
+            },error: function(xhr, status, error) {
+                alert(xhr.responseText);
+                console.log(error);
             }
         })
-        $('#result03').html(html);
+//        $('#result03').html(html);
     })
 
 </script>
