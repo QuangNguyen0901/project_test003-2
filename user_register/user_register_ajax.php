@@ -7,7 +7,47 @@
     <link rel="stylesheet" href="/css/bootstrap-3.3.7-dist/css/bootstrap.css"/>
 </head>
 <body>
+<?php include("../includes/mysqli_connect.php"); ?>
+<?php
+if (isset($_POST['confirm'])) {
+    $error = array();
+    if (empty($_POST['uname'])) {
+        $error[] = "user_name";
 
+    } else {
+        $uname = mysqli_real_escape_string($conn, strip_tags($_POST['uname']));
+    }
+    if (empty($_POST['pass'])) {
+        $error[] = "pass";
+    } else {
+        $pass = mysqli_real_escape_string($conn, strip_tags($_POST['pass']));
+    }
+    if (empty($_POST['confirm_pass'])) {
+        $error[] = "confirm_pass";
+    } else if ($_POST['pass'] != $_POST['confirm_pass']) {
+        $error[] = "confirm_pass2";
+////////////////////////////////////////
+    }
+    if (empty($_POST['sex'])) {
+        $error[] = "sex";
+    } else {
+        $sex = mysqli_real_escape_string($conn, strip_tags($_POST['sex']));
+    }
+    if (empty($error)){
+        $q = "INSERT INTO user (username, pass) VALUE ('{$uname}','{$pass}')";
+        $r = mysqli_query($conn,$q) or die ("Query {$q} \n<br/> MySQL Error: " . mysqli_error($conn));
+        if (mysqli_affected_rows($conn) == 1) {
+            $messages = "<p style='color: red'>Đã đăng ký user thành công</p>";
+//            header("Location:user_register.php"); //reload page
+        } else {
+            $messages = "<p class='label-warning'>Đăng ký user không thành công, không kết nối với DB được </p>";
+        }
+    }
+//    print_r($_POST);
+//    print_r($error);
+}
+
+?>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12" style="background-color:lavender;">TOP</div>
@@ -16,7 +56,7 @@
         <div class="col-md-2">LEFT</div>
         <div class="col-md-8" style="background-color: #ffbe87;">
             <h4>Member Register</h4>
-            <form method="post" action="user_register.php" name="register_form">
+            <form id="register_frm" method="post" action="user_register_ajax.php" name="register_form">
                 <div class="form-group">
                     <label>User Name:</label>
                     <input type="text" class="form-control" name="uname" id="usr">
@@ -47,8 +87,10 @@
                 <!--                <div class="checkbox">-->
                 <!--                    <label><input type="checfsdfsdfdskbox"> Remember me</label>-->
                 <!--                </div>-->
-                <button type="submit" class="btn btn-primary" id="btn_confirm" name="confirm">Confirm</button>
+                <button type="button" class="btn btn-primary" id="btn_confirm" name="confirm">Confirm</button>
+<!--                <button type="button" class="btn btn-primary" id="btn_confirm" name="confirm">Confirm</button>-->
             </form>
+            <div id="showerror"></div>
             <p id="demo"></p>
         </div>
         <div class="col-md-2">RIGHT</div>
@@ -58,16 +100,16 @@
     </div>
 </div>
 
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
 <script>
-    $("#btn_confirm").click(function() {
-        return validate_form();
+    $("#btn_confirm").click(function () {
+        validate_form();
 //        var a = document.getElementById("validate_pass");
 //        var x = document.getElementById("pwd").value;
 //        if (x==""){
 //            a.innerHTML="Please input password";
-//            return false;
 //        }
     });
     function validate_form() {
@@ -81,46 +123,68 @@
         var x4a = document.getElementById("sex-1");
         var x4b = document.getElementById("sex-2");
 
-        var chk = true;
-
-        if (x1=="") {
+        if (x1 == "") {
             a1.innerHTML = "Please input username";
-            chk = false;
-        }else {
+            return false;
+        } else {
             a1.innerHTML = "";
         }
 
-        if (x2==""){
-            a2.innerHTML="Please input password";
-            chk = false;
-        }else if(!x2.match(/^\d+$/g)){
-            a2.innerHTML="Please input only number";
-            chk = false;
-        }else if((x2.length < 6)||(x2.length > 8)){
-            a2.innerHTML="Please input 6-8 characters";
-            chk = false;
-        }else{
-            a2.innerHTML="";
+        if (x2 == "") {
+            a2.innerHTML = "Please input password";
+            return false;
+        } else if (!x2.match(/^\d+$/g)) {
+            a2.innerHTML = "Please input only number";
+            return false;
+        } else if ((x2.length < 6) || (x2.length > 8)) {
+            a2.innerHTML = "Please input 6-8 characters";
+            return false;
+        } else {
+            a2.innerHTML = "";
         }
 
-        if (x3=="") {
+        if (x3 == "") {
             a3.innerHTML = "Please input confirm password";
-            chk = false;
-        }else if(x2 != x3){
+            return false;
+        } else if (x2 != x3) {
             a3.innerHTML = "Confirm pass not match password";
-            chk = false;
-        }else{
+            return false;
+        } else {
             a3.innerHTML = "";
         }
 
-        if(x4a.checked==false && x4b.checked==false){
+        if (x4a.checked == false && x4b.checked == false) {
             a4.innerHTML = "Please select male or female";
             chk = false;
-        }else{
+        } else {
             a4.innerHTML = "";
         }
-        return chk;
+        $.ajax({
+            url: 'do_validate.php',
+            type: 'post',
+            dataType: 'json',
+            data: {username: x1},
+            success: function (result) {
+                var html = '';
+
+                if ($.trim(result.username) != '') {
+                    html += result.username + '<br/>';
+
+                    if (html != '') {
+                        $('#showerror').append(html);
+                        return false;
+                    } else {
+//                        $('#showerror').append('Thêm thành công');
+                        $("#register_frm").submit();
+                    }
+                }
+            },
+            error: function (error) {
+                alert('error; ' + eval(error));
+            }
+        });
     }
+
 </script>
 
 </body>

@@ -1,7 +1,38 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: MinhQuang
- * Date: 2017/09/04
- * Time: 14:18
- */
+$username = isset($_POST['username']) ? $_POST['username'] : false;
+
+
+if (!$username){
+    die ('{error:"bad_request"}');
+}
+
+// Kết nối database
+$conn = mysqli_connect('localhost', 'root', '', 'kmtest') or die ('{error:"bad_request"}');
+
+
+// Khai báo biến lưu lỗi
+$error = array(
+    'error' => 'success',
+    'username' => '',
+);
+
+// Kiểm tra tên đăng nhập
+if ($username)
+{
+    $query = mysqli_query($conn, 'select count(*) as count from user where username = \''.  addslashes($username).'\'');
+
+    if ($query){
+        $row = mysqli_fetch_array($query, MYSQLI_ASSOC);
+        if ((int)$row['count'] > 0){
+            $error['username'] = 'Tên đăng nhập đã tồn tại';
+        }
+    }
+    else{
+        die ('{error:"bad_request"}');
+    }
+}
+
+
+
+// Trả kết quả về cho client
+die (json_encode($error));
