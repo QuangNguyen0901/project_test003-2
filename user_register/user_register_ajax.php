@@ -4,12 +4,13 @@
     <title>Ah Khuyến Mãi_Đăng ký</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/css/bootstrap-3.3.7-dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="../css/bootstrap-3.3.7-dist/css/bootstrap.css"/>
 </head>
 <body>
 <?php include("../includes/mysqli_connect.php"); ?>
 <?php
-if (isset($_POST['confirm'])) {
+if (!empty($_POST)) {
+
     $error = array();
     if (empty($_POST['uname'])) {
         $error[] = "user_name";
@@ -43,8 +44,6 @@ if (isset($_POST['confirm'])) {
             $messages = "<p class='label-warning'>Đăng ký user không thành công, không kết nối với DB được </p>";
         }
     }
-//    print_r($_POST);
-//    print_r($error);
 }
 
 ?>
@@ -56,6 +55,7 @@ if (isset($_POST['confirm'])) {
         <div class="col-md-2">LEFT</div>
         <div class="col-md-8" style="background-color: #ffbe87;">
             <h4>Member Register</h4>
+            <?php if (!empty($messages)) echo $messages ?>
             <form id="register_frm" method="post" action="user_register_ajax.php" name="register_form">
                 <div class="form-group">
                     <label>User Name:</label>
@@ -88,7 +88,6 @@ if (isset($_POST['confirm'])) {
                 <!--                    <label><input type="checfsdfsdfdskbox"> Remember me</label>-->
                 <!--                </div>-->
                 <button type="button" class="btn btn-primary" id="btn_confirm" name="confirm">Confirm</button>
-<!--                <button type="button" class="btn btn-primary" id="btn_confirm" name="confirm">Confirm</button>-->
             </form>
             <div id="showerror"></div>
             <p id="demo"></p>
@@ -169,14 +168,13 @@ if (isset($_POST['confirm'])) {
 
                 if ($.trim(result.username) != '') {
                     html += result.username + '<br/>';
-
                     if (html != '') {
                         $('#showerror').append(html);
-                        return false;
-                    } else {
-//                        $('#showerror').append('Thêm thành công');
-                        $("#register_frm").submit();
                     }
+                } else {
+                    // con
+//                        $('#showerror').append('Thêm thành công');
+                    $("#register_frm").submit();
                 }
             },
             error: function (error) {
