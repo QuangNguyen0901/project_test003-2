@@ -87,7 +87,7 @@ if (!empty($_POST)) {
                 <!--                <div class="checkbox">-->
                 <!--                    <label><input type="checfsdfsdfdskbox"> Remember me</label>-->
                 <!--                </div>-->
-                <button type="button" class="btn btn-primary" id="btn_confirm" name="confirm">Confirm</button>
+                <button type="button" class="btn btn-primary" id="btn_confirm">Confirm</button>
             </form>
             <div id="showerror"></div>
             <p id="demo"></p>
@@ -167,13 +167,16 @@ if (!empty($_POST)) {
                 var html = '';
 
                 if ($.trim(result.username) != '') {
+                    $('#showerror').empty();
                     html += result.username + '<br/>';
                     if (html != '') {
                         $('#showerror').append(html);
                     }
                 } else {
+
                     // con
 //                        $('#showerror').append('Thêm thành công');
+                    html = '';
                     $("#register_frm").submit();
                 }
             },
