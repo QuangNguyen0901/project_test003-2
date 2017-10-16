@@ -8,30 +8,24 @@
 <body>
 <h3>Users</h3>
 <div class="table-bordered">
-    <div class="1user" style="float:left width: 200px;" >
-        <h4>User</h4>
-        <p>Nguyen Van A</p>
-        <h4>Sex</h4>
-        <p>nam</p>
+    <?php
+    include("../Controller/c_user.php"); ?>
+
+    <?php
+    print_r($user);
+    foreach ($user as $user){
+    ?>
+
+    <div class="1user table-bordered" style="float:left; width: 150px;">
+        <h4> User</h4>
+        <p> <?php echo $user->username ?> </p>
+        <h4> Sex</h4>
+        <p> <?php echo $username->sex ?></p>
     </div>
-    <div class="1user" style="float:left width: 200px;" >
-        <h4>User</h4>
-        <p>Nguyen Van A</p>
-        <h4>Sex</h4>
-        <p>nam</p>
-    </div>
-    <div class="1user" style="float:left width: 200px;" >
-        <h4>User</h4>
-        <p>Nguyen Van A</p>
-        <h4>Sex</h4>
-        <p>nam</p>
-    </div>
-    <div class="1user" style="float:left width: 200px;" >
-        <h4>User</h4>
-        <p>Nguyen Van A</p>
-        <h4>Sex</h4>
-        <p>nam</p>
-    </div>
+    <?php
+    }
+    ?>
+
 </div>
 </body>
 </html>
